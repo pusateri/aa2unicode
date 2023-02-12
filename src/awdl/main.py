@@ -63,12 +63,11 @@ def transform(l, c, old, new):
         a = above_char(l, c, old)
         # leading edge
         if (p == ' ' or p == None) and (n == '-' or n == '+'):
-            print(c, l, p, n, a, b)
-            if (a == ' ' or a == None) and b == '|':
+            if (a == ' ' or a == None or a == '.') and b == '|':
                 new[l][c] = '┌'
             elif a == '|' and b == '|':
                 new[l][c] = '├'
-            elif a == '|' and (b == ' ' or b == None):
+            elif a == '|' and (b == ' ' or b == None or b == '.'):
                 new[l][c] = '└'
         # interior
         elif (p == '-' or p == '+') and (n == '-' or n == '+'):
@@ -82,11 +81,12 @@ def transform(l, c, old, new):
                 new[l][c] = '┼'
         # trailing edge
         elif p == '-' and (n == ' ' or n == None):
-            if (a == ' ' or a == None) and b == '|':
+            print(c, l, p, n, a, b)
+            if (a == ' ' or a == None or a == '.') and b == '|':
                 new[l][c] = '┐'
             if a == '|' and b == '|':
                 new[l][c] = '┤'
-            if a == '|' and (b == ' ' or b == None):
+            if a == '|' and (b == ' ' or b == None or b == '.'):
                 new[l][c] = '┘'
     elif old[l][c] == '-':
         new[l][c] = '─'
