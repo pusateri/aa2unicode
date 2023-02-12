@@ -1,0 +1,40 @@
+           Figure 1: Per-(S,G) Register State Machine at a DR
+   
++----------++----------------------------------------------------------+
+|          ||                          Event                           |
+|          ++----------+-----------+-----------+-----------+-----------+
+|Prev State||Register- | Could     | Could     | Register- | RP changed|
+|          ||Stop Timer| Register  | Register  | Stop      |           |
+|          ||expires   | ->True    | ->False   | received  |           |
++----------++----------+-----------+-----------+-----------+-----------+
+|NoInfo    ||-         | -> J state| -         | -         | -         |
+|(NI)      ||          | add reg   |           |           |           |
+|          ||          | tunnel    |           |           |           |
++----------++----------+-----------+-----------+-----------+-----------+
+|          ||-         | -         | -> NI     | -> P state| -> J state|
+|          ||          |           | state     |           |           |
+|          ||          |           | remove reg| remove reg| update reg|
+|Join (J)  ||          |           | tunnel    | tunnel;   | tunnel    |
+|          ||          |           |           | set       |           |
+|          ||          |           |           | Register- |           |
+|          ||          |           |           | Stop      |           |
+|          ||          |           |           | Timer(*)  |           |
++----------++----------+-----------+-----------+-----------+-----------+
+|          ||-> J state| -         | -> NI     | -> P state| -> J state|
+|          ||          |           | state     |           |           |
+|Join-     ||add reg   |           |           | set       | add reg   |
+|Pending   ||tunnel    |           |           | Register- | tunnel;   |
+|(JP)      ||          |           |           | Stop      | cancel    |
+|          ||          |           |           | Timer(*)  | Register- |
+|          ||          |           |           |           | Stop Timer|
++----------++----------+-----------+-----------+-----------+-----------+
+|          ||-> JP     | -         | -> NI     | -         | -> J state|
+|          ||state     |           | state     |           |           |
+|          ||set       |           |           |           | add reg   |
+|Prune (P) ||Register- |           |           |           | tunnel;   |
+|          ||Stop      |           |           |           | cancel    |
+|          ||Timer(**);|           |           |           | Register- |
+|          ||send Null-|           |           |           | Stop Timer|
+|          ||Register  |           |           |           |           |
++----------++----------+-----------+-----------+-----------+-----------+
+
