@@ -17,6 +17,9 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+[project.scripts]
+awdl = "awdl:main"
+
 [project.urls]
 "Homepage" = "https://github.com/pusateri/awdl"
 "Bug Tracker" = "https://github.com/pusateri/awdl/issues"
