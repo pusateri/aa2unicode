@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 [project.scripts]
-awdl = "awdl:main"
+awdl = "awdl.main:main"
 
 [project.urls]
 "Homepage" = "https://github.com/pusateri/awdl"

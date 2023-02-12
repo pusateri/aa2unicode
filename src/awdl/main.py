@@ -6,7 +6,7 @@ from copy import deepcopy
 
 help = """Module docstring.
 
-Convert lineart from ASCII to other formats.
+Convert artwork from ASCII to Unicode box characters
 lineart [-h | --help]
 lineart <input file>
 
@@ -39,6 +39,8 @@ def below_char(l, c, chars):
 
 
 def previous_char(l, c, chars):
+    if c == 0:
+        return None
     return chars[l][c-1]
 
 
@@ -60,15 +62,16 @@ def transform(l, c, old, new):
         b = below_char(l, c, old)
         a = above_char(l, c, old)
         # leading edge
-        if (p == ' ' or p == None) and n == '-':
-            if a == ' ' and b == '|':
+        if (p == ' ' or p == None) and (n == '-' or n == '+'):
+            print(c, l, p, n, a, b)
+            if (a == ' ' or a == None) and b == '|':
                 new[l][c] = '┌'
             elif a == '|' and b == '|':
                 new[l][c] = '├'
             elif a == '|' and (b == ' ' or b == None):
                 new[l][c] = '└'
         # interior
-        elif p == '-' and n == '-':
+        elif (p == '-' or p == '+') and (n == '-' or n == '+'):
             if a != '|' and b != '|':
                 new[l][c] = '─'
             if a != '|' and b == '|':
