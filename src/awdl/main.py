@@ -81,7 +81,6 @@ def transform(l, c, old, new):
                 new[l][c] = '┼'
         # trailing edge
         elif p == '-' and (n == ' ' or n == None):
-            print(c, l, p, n, a, b)
             if (a == ' ' or a == None or a == '.') and b == '|':
                 new[l][c] = '┐'
             if a == '|' and b == '|':
