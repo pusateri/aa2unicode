@@ -3,12 +3,12 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "awdl"
-version = "0.1.0"
+name = "aa2unicode"
+version = "0.2.0"
 authors = [
   { name="Tom Pusateri", email="pusateri@bangj.com" },
 ]
-description = "ArtWork Description Language Tools"
+description = "ASCII Artwork to Unicode box characters"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
@@ -18,8 +18,8 @@ classifiers = [
 ]
 
 [project.scripts]
-awdl = "awdl.main:main"
+aa2unicode = "aa2unicode.main:main"
 
 [project.urls]
-"Homepage" = "https://github.com/pusateri/awdl"
-"Bug Tracker" = "https://github.com/pusateri/awdl/issues"
+"Homepage" = "https://github.com/pusateri/aa2unicode"
+"Bug Tracker" = "https://github.com/pusateri/aa2unicode/issues"
