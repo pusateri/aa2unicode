@@ -2,13 +2,14 @@
 
 import getopt
 import sys
+import fileinput
 from copy import deepcopy
 
 help = """Module docstring.
 
 Convert artwork from ASCII to Unicode box characters
 aa2unicode [-h | --help]
-aa2unicode <input file>
+aa2unicode [<input file> <input file> ...]
 
 """
 
@@ -108,19 +109,17 @@ def main():
             print(help)
             sys.exit(0)
 
-    for arg in args:
-        with open(arg) as file:
-            lines = [line.rstrip() for line in file]
+    lines = [line.rstrip() for line in fileinput.input(encoding="utf-8")]
 
-            chars = [list(line) for line in lines]
+    chars = [list(line) for line in lines]
 
-            out = deepcopy(chars)
+    out = deepcopy(chars)
 
-            for achar in range(len(chars)):
-                for c in range(len(chars[achar])):
-                    transform(achar, c, chars, out)
+    for achar in range(len(chars)):
+        for c in range(len(chars[achar])):
+            transform(achar, c, chars, out)
 
-            print_chars(out)
+    print_chars(out)
 
 
 if __name__ == "__main__":
