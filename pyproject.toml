@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aa2unicode"
-version = "0.2.1"
+version = "0.2.2"
 authors = [
   { name="Tom Pusateri", email="pusateri@bangj.com" },
 ]

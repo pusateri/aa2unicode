@@ -64,13 +64,16 @@ def transform(line, c, old, new):
         b = below_char(line, c, old)
         a = above_char(line, c, old)
         # leading edge
-        if (p == ' ' or p is None) and (n == '-' or n == '+'):
+        if (p == ' ' or p is None) and (n == '-' or n == '+' or n == ' '):
             if (a == ' ' or a is None or a == '.') and b == '|':
                 new[line][c] = '┌'
             elif a == '|' and b == '|':
                 new[line][c] = '├'
             elif a == '|' and (b == ' ' or b is None or b == '.'):
                 new[line][c] = '└'
+            elif b == '|':
+                new[line][c] = '┌'
+
         # interior
         elif (p == '-' or p == '+') and (n == '-' or n == '+'):
             if a != '|' and b != '|':
@@ -82,7 +85,7 @@ def transform(line, c, old, new):
             if a == '|' and b == '|':
                 new[line][c] = '┼'
         # trailing edge
-        elif p == '-' and (n == ' ' or n is None):
+        elif (p == '-' or p == ' ') and (n == ' ' or n is None):
             if (a == ' ' or a is None or a == '.') and b == '|':
                 new[line][c] = '┐'
             if a == '|' and b == '|':
